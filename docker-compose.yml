@@ -1,7 +1,10 @@
 version: "3.9"
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        VITE_API_URL: ${VITE_API_URL}
     image: muellmer:latest
     environment:
       NODE_ENV: production
