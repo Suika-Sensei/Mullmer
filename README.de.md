@@ -2,6 +2,8 @@
 
 Eine schlanke Full‑Stack‑App, die ein Bild aufnimmt oder importiert und es mit dem Google‑Gemini‑Modell analysiert. Ergebnis ist ein striktes JSON zur Mülltrennung in Deutschland.
 
+[Read in English](README.md)
+
 ## Architektur
 
 - **Frontend (Vite + React)** in `src/`
@@ -71,6 +73,31 @@ Hinweise:
   - `dist/` bei Netlify/Vercel hosten.
   - `server/` bei Render/Railway/Fly mit derselben `.env` deployen.
   - Frontend auf die bereitgestellte `/api/analyze-image`‑URL konfigurieren.
+
+### Docker
+
+- Build & Run mit Compose:
+
+```bash
+docker compose up --build -d
+# App: http://localhost:${PORT:-3001}
+```
+
+- Build & Run mit Docker (ohne Compose):
+
+```bash
+docker build -t muellmer:latest .
+docker run -d \
+  --name muellmer \
+  -p ${PORT:-3001}:3001 \
+  --env-file ./.env \
+  muellmer:latest
+```
+
+- Umgebung:
+  - Secrets in `.env` (nicht eingecheckt). Erforderlich: `GEMINI_API_KEY`.
+  - `PORT` steuert den Host‑Port im Compose‑Mapping (Container hört immer auf `3001`).
+  - `NODE_ENV=production` ist im Container standardmäßig gesetzt.
 
 ## API
 

@@ -2,6 +2,8 @@
 
 A minimal full‑stack app that captures or imports an image and analyzes it with Google's Gemini model to produce a strict JSON result describing waste separation in Germany.
 
+[Deutsch lesen](README.de.md)
+
 ## Architecture
 
 - **Frontend (Vite + React)** in `src/`
@@ -71,6 +73,31 @@ Notes:
   - Host `dist/` on Netlify/Vercel.
   - Deploy `server/` to Render/Railway/Fly with the same `.env`.
   - Frontend should call the deployed `/api/analyze-image` URL.
+
+### Docker
+
+- Build and run with Compose:
+
+```bash
+docker compose up --build -d
+# App: http://localhost:${PORT:-3001}
+```
+
+- Build and run with plain Docker:
+
+```bash
+docker build -t muellmer:latest .
+docker run -d \
+  --name muellmer \
+  -p ${PORT:-3001}:3001 \
+  --env-file ./.env \
+  muellmer:latest
+```
+
+- Environment:
+  - Put secrets in `.env` (not committed). Required: `GEMINI_API_KEY`.
+  - `PORT` controls host port mapping in Compose (container always listens on `3001`).
+  - `NODE_ENV=production` is set in the container by default.
 
 ## API
 
