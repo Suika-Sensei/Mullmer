@@ -33,7 +33,7 @@ export default function ResultModal({ result, onClose }) {
     <div className="modal-backdrop" onClick={onClose}>
       <div
         className={`modal-container rounded-3xl ${
-          deviceType == DEVICE_TYPES.MOBILE ? "w-3/4" : ""
+          deviceType == DEVICE_TYPES.MOBILE ? "w-3/4" : "w-1/4"
         }`}
         style={{
           maxWidth: deviceType == DEVICE_TYPES.MOBILE ? "90%" : "50%",
@@ -66,4 +66,3 @@ export default function ResultModal({ result, onClose }) {
     </div>
   );
 }
-
